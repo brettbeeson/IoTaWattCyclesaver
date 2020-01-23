@@ -170,6 +170,7 @@ struct EEprom {
 #define T_samplePhase 23   // Sample phase (within samplePower) 
 #define T_RTCWDT 24        // Dead man pedal service
 #define T_CSVquery 25      // CSVquery            
+#define T_CycleSave 26     // Cycle saver service
 
       // LED codes
 
@@ -271,6 +272,7 @@ extern uint32_t EmonCMSInterval;               // Interval (sec) to invoke EmonC
 extern uint32_t influxDBInterval;              // Interval (sec) to invoke inflexDB
 extern uint32_t statServiceInterval;           // Interval (sec) to invoke statService
 extern uint32_t updaterServiceInterval;        // Interval (sec) to check for software updates
+extern uint32_t cycleSaverServiceInterval;     // Interval (sec) 
 
 extern bool     hasRTC;
 extern bool     RTCrunning;
@@ -300,12 +302,14 @@ extern int32_t  sumVI;
 extern int16_t  samples;                          // Number of samples taken in last sampling
 extern int16_t  Vsample [MAX_SAMPLES];            // voltage/current pairs during sampling
 extern int16_t  Isample [MAX_SAMPLES];
+extern int      sampledChannel;
 
       // ************************ Declare global functions
 void      setup();
 void      loop();
 void      trace(const uint8_t module, const uint8_t id, const uint8_t det=0); 
 void      logTrace(void);
+void      printSamples(); // debug only
 
 void      NewService(uint32_t (*serviceFunction)(struct serviceBlock*), const uint8_t taskID=0);
 void      AddService(struct serviceBlock*);
@@ -313,6 +317,7 @@ uint32_t  dataLog(struct serviceBlock*);
 void      datalogWDT();
 uint32_t  historyLog(struct serviceBlock*);
 uint32_t  statService(struct serviceBlock*);
+uint32_t  cycleSaverService(struct serviceBlock*);
 uint32_t  EmonService(struct serviceBlock*);
 uint32_t  influxService(struct serviceBlock*);
 uint32_t  timeSync(struct serviceBlock*);

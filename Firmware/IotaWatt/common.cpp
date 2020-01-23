@@ -198,6 +198,7 @@ uint32_t EmonCMSInterval = 10;               // Interval (sec) to invoke EmonCMS
 uint32_t influxDBInterval = 10;              // Interval (sec) to invoke inflexDB 
 uint32_t statServiceInterval = 1;            // Interval (sec) to invoke statService
 uint32_t updaterServiceInterval = 60*60;     // Interval (sec) to check for software updates 
+uint32_t cycleSaverServiceInterval = 10;      // Interval (sec) to invoke statService
 
 bool     hasRTC = false;
 bool     RTCrunning = false;
@@ -231,4 +232,5 @@ uint32_t  sumIsq;
 int32_t   sumVI; 
 int16_t   samples = 0;                              // Number of samples taken in last sampling
 int16_t   Vsample [MAX_SAMPLES];                    // voltage/current pairs during sampling
-int16_t   Isample [MAX_SAMPLES];
+int16_t   Isample [MAX_SAMPLES];    
+int       sampledChannel = 0;                        // channel on which Vsample and Isample where taken

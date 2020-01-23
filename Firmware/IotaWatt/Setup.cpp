@@ -248,6 +248,7 @@ if(spiffsBegin()){
   NewService(updater, T_UPDATE);
   NewService(dataLog, T_datalog);
   NewService(historyLog, T_history);
+  NewService(cycleSaverService,T_CycleSave);
 
   if(! validConfig){
     setLedCycle(LED_BAD_CONFIG);

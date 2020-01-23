@@ -11,10 +11,12 @@ void loop()
  *  Go back, Jack, and do it again.
  ******************************************************************************/
 
+                               
+
   setLedState();
 
   // ------- If AC zero crossing approaching, go sample a channel.
-  static int lastChannel = 0;
+  static int lastChannel = 0;  
   if(maxInputs && (uint32_t)(millis() - lastCrossMs) >= (430 / int(frequency))){
     trace(T_LOOP,1,lastChannel);
     int nextChannel = (lastChannel + 1) % maxInputs;
@@ -24,6 +26,9 @@ void loop()
     ESP.wdtFeed();
     trace(T_LOOP,2,nextChannel);
     samplePower(nextChannel, 0);
+    sampledChannel = nextChannel;
+    printSamples();
+    
     trace(T_LOOP,2);
     nextCrossMs = lastCrossMs + 490 / int(frequency);
     if(nextChannel <= lastChannel) sampling = true;

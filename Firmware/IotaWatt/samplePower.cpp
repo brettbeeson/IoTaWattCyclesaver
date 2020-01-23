@@ -55,6 +55,7 @@ void samplePower(int channel, int overSample){
     }
     return;
   }          
+ 
       
         // Voltage calibration is the ratio of line voltage to voltage presented at the input.
         // Input voltage is further attenuated with voltage dividing resistors (Vadj_3).
