@@ -94,14 +94,15 @@
  *   08/13/19 02_04_02 Maintenance. PVoutput recovery, Save last config, safe mode on config problems
  *   10/04/19 02_05_00 Changes to new query and new Graph+ 
  *   10/12/19 02_05_01 Graph+ add download, add datalog WTD, add Query progress check, increase Query limit to 100K
- *   12/04/19 02_05_02 Graph+ improvements,                   
+ *   12/04/19 02_05_02 Graph+ improvements
+ *   01/19/20 02_05_03 Update use versions.json, derived phase-phase support, Issue #252 query seconds, Fix Graph+ delete,
+ *                     Fix and improve authorization, instantiate WiFiManager in local scope.                 
  * 
  *****************************************************************************************************/
 
       // Define instances of major classes to be used
 
 WiFiClient WifiClient;
-WiFiManager wifiManager;
 DNSServer dnsServer;    
 IotaLog currLog(5,365);                     // current data log  (1 year) 
 IotaLog histLog(60,3652);                   // history data log  (10 years)  
@@ -212,8 +213,8 @@ uint8_t  ledCount;                           // Current index into cycle
       // ****************************** Firmware update ****************************
       
 const char* updateURL = "iotawatt.com";
-const char* updatePath = "/firmware/iotaupdt.php";
-char*    updateClass;                                   // NONE, MAJOR, MINOR, BETA, ALPHA, TEST    
+const char* updatePath = "/firmware/versions.json";
+char*    updateClass = nullptr;                                   // NONE, MAJOR, MINOR, BETA, ALPHA, TEST    
 const uint8_t publicKey[32] PROGMEM = {
                         0x7b, 0x36, 0x2a, 0xc7, 0x74, 0x72, 0xdc, 0x54,
                         0xcc, 0x2c, 0xea, 0x2e, 0x88, 0x9c, 0xe0, 0xea,

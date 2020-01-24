@@ -22,7 +22,6 @@ void handleGraphCreate(){
   String filePath = graphDir;
   String fileName = hashName(graph["name"].as<char*>());
   filePath += "/" + fileName + ".txt";
-  Serial.printf("graphname: %s\n", filePath.c_str());
   SD.remove(filePath);
   graphFile = SD.open(filePath, FILE_WRITE);
   if( ! graphFile){
@@ -40,7 +39,7 @@ void handleGraphCreate(){
 void handleGraphDelete(){
   String filePath = graphDir;
   String fileName = server.arg("id");
-  filePath += "/" + fileName + ".txt";
+  filePath += "/" + fileName;
   SD.remove(filePath);
   server.send(200, txtJson_P, F("{\"success\":true,\"message\":\"deleted\"}"));
 }
